@@ -3,30 +3,34 @@ from common.models import CommonModel
 
 
 # Create your models here.
-class Review(CommonModel):
-    """Review from a User to a Room or Experience"""
-
-    user = models.ForeignKey(
-        "users.User",
-        on_delete=models.CASCADE,
-        related_name="reviews",
+class Photo(CommonModel):
+    file = models.ImageField()
+    description = models.CharField(
+        max_length=140,
     )
     room = models.ForeignKey(
         "rooms.Room",
         null=True,
         blank=True,
         on_delete=models.CASCADE,
-        related_name="reviews",
     )
     experience = models.ForeignKey(
         "experiences.Experience",
         null=True,
         blank=True,
         on_delete=models.CASCADE,
-        related_name="reviews",
     )
-    payload = models.TextField()
-    rating = models.PositiveIntegerField()
 
     def __str__(self):
-        return f"{self.user} / {self.rating}💛"
+        return "Photo File"
+
+
+class Video(CommonModel):
+    file = models.FileField()
+    experience = models.OneToOneField(
+        "experiences.Experience",
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return "Video File"
