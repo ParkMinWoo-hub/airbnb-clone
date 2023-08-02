@@ -5,5 +5,8 @@ from .models import Category
 class CategorySereializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = "__all__"
+        fields = (
+            "name",
+            "kind",
+        )
         # exclude = ("created_at",)
